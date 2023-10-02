@@ -1,6 +1,5 @@
 jQuery(window).on('load', function() {
-	"use strict";
-    
+    "use strict";
     
     // HIDE PRELOADER
     $(".preloader").addClass("hide-preloader");   
@@ -21,14 +20,11 @@ jQuery(window).on('load', function() {
         });
 
     }, 700 );
-
     
 });
 
-
 jQuery(document).ready(function($) {
-	"use strict";
-    
+    "use strict";
     
     // SMOOTH SCROLL FOR SAME PAGE LINKS
     $(document).on('click', 'a.smooth-scroll', function(event) {
@@ -40,7 +36,6 @@ jQuery(document).ready(function($) {
         }, 500);
         
     });
-    
     
     // SCROLL REVEAL SETUP
     window.sr = ScrollReveal();
@@ -54,7 +49,6 @@ jQuery(document).ready(function($) {
         viewFactor: 0.4,
         scale: 1,
     });
-    
     
     // AJAX CONTACT FORM SUBMIT
     $("#contact-form").submit(function(e) {
@@ -109,5 +103,19 @@ jQuery(document).ready(function($) {
 
     });
 
-    
+    // Fetch and update the visitor counter
+    $.ajax({
+        url: 'https://vyk80b9hhg.execute-api.us-east-1.amazonaws.com/default',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            if (data && data.Count) {
+                $('#visitor_counter').text(data.Count);
+            }
+        },
+        error: function(err) {
+            console.error('Error fetching visitor count:', err);
+        }
+    });
+
 });
