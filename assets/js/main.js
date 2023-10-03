@@ -103,19 +103,25 @@ jQuery(document).ready(function($) {
 
     });
 
-    // Fetch and update the visitor counter
-    $.ajax({
-        url: 'https://vyk80b9hhg.execute-api.us-east-1.amazonaws.com/default',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            if (data && data.Count) {
-                $('#visitor_counter').text(data.Count);
-            }
-        },
-        error: function(err) {
-            console.error('Error fetching visitor count:', err);
-        }
-    });
+ // GET API REQUEST
+async function get_visitors() {
+    // call post api request function
+    //await post_visitor();
+    try {
+        let response = await fetch('https://z79uyas992.execute-api.us-east-1.amazonaws.com/default', {
+            method: 'GET',
+        });
+        let data = await response.json()
+        document.getElementById("visitors").innerHTML = data['count'];
+        console.log(data);
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+
+get_visitors();
+
 
 });
